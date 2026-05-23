@@ -116,7 +116,6 @@ const introScreen = new lab.html.Form({
     '<h3 style="text-align: center; margin-bottom: 30px;">Consent Form</h3>' +
     '<div class="task-wrapper" style="margin-bottom: 25px;">' +
     '<form id="form-consent">' +
-    "<p>I confirm that I've read the <a href=\"./information.html\">information sheet</a> and I agree to participate in Prof. Victor Lazzarini's research study.</p>" +
     '<p style="margin-bottom: 20px;"><b>Please check each statement below to indicate your agreement:</b></p>' +
     // Checkbox 1
     '<div style="margin-bottom: 15px; display: flex; align-items: flex-start;">' +
@@ -148,12 +147,17 @@ const introScreen = new lab.html.Form({
     '<input type="checkbox" id="chk-consent-6" name="consent_confidentiality" value="yes" required style="margin-top: 4px;">' +
     '<label for="chk-consent-6" style="margin-left: 10px; cursor: pointer;">I understand the limits of confidentiality as described in the information sheet.</label>' +
     "</div>" +
-    '<hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">' +
-    // Digital Signature
-    '<div style="margin-bottom: 20px;">' +
-    '<label for="participant-name"><b>Digital Signature (Type your full name):</b></label><br>' +
-    '<input type="text" id="participant-name" name="participant_name" required style="width: 100%; max-width: 400px; padding: 8px; margin-top: 8px; border: 1px solid #ccc; border-radius: 4px;" placeholder="Participant Name in block capitals">' +
+    // Checkbox 7
+    '<div style="margin-bottom: 15px; display: flex; align-items: flex-start;">' +
+    '<input type="checkbox" id="chk-consent-7" name="consent_agreement" value="yes" required style="margin-top: 4px;">' +
+    '<label for="chk-consent-7" style="margin-left: 10px; cursor: pointer;">I confirm that I\'ve read the <a href=\"./information.html\" target="_blank">information sheet</a> and I agree to participate in Prof. Victor Lazzarini\'s research study.</label>' +
     "</div>" +
+    //'<hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">' +
+    // Digital Signature
+    //'<div style="margin-bottom: 20px;">' +
+    //'<label for="participant-name"><b>Digital Signature (Type your full name):</b></label><br>' +
+    //'<input type="text" id="participant-name" name="participant_name" required style="width: 100%; max-width: 400px; padding: 8px; margin-top: 8px; border: 1px solid #ccc; border-radius: 4px;" placeholder="Participant Name in block capitals">' +
+    //"</div>" +
     // Footer Information
     '<div style="margin-top: 40px; padding-top: 20px; border-top: 2px dashed #eee;">' +
     '<p style="font-size: 0.85em; color: #555; line-height: 1.4; margin-bottom: 15px;">' +
@@ -1821,13 +1825,23 @@ const seconds = d.getSeconds().toString();
 const mili = d.getMilliseconds().toString();
 const datetime = hours + minutes + seconds + mili;
 
-//Download everything
+// =========================================================================
+// STUDY EXECUTION & DATA TRANSMISSION (Google Sheets Backend)
+// =========================================================================
+const GOOGLE_WEB_APP_URL =
+  "https://script.google.com/macros/s/AKfycbyANppfcfti7ABQrIqtbXxNjP9AcQCsu80Jb1W3zI2ufGILyFhe3cr7lRKT2VXUhQS-/exec";
+
 study.on("end", function () {
-  study.options.datastore.download(
-    (filetype = "csv"),
-    (filename = "data_" + datetime),
-  );
+  study.options.datastore.transmit(GOOGLE_WEB_APP_URL, {
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+  });
 });
 
-// Start the study
+//study.on("end", function () {
+//  study.options.datastore.download(
+//    (filetype = "csv"),
+//    (filename = "data_" + datetime),
+//  );
+//});
+
 study.run();
