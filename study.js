@@ -1756,23 +1756,80 @@ const goldsmithTest = new lab.html.Form({
     "</div>",
 });
 
+const GOOGLE_WEB_APP_URL =
+  "https://script.google.com/macros/s/AKfycbz-jPN1E6eOD5IP3EwBZScmBmhH4UUAD7Mm2tVUbBbZGLsNB476jVwXm_7wn0dk2wix/exec";
+
 const thankYouScreen = new lab.html.Form({
   content:
     '<div style="width: 100%; text-align: left; max-width: 800px; margin: 0 auto; padding: 10px;">' +
     '<h3 style="text-align: center; margin-bottom: 30px;">Thank You!</h3>' +
     '<div class="task-wrapper" style="margin-bottom: 25px;">' +
-    "<p>Your responses have been successfully recorded.</p>" +
-    "<p>We greatly appreciate your time and participation in this research study.</p>" +
-    "<p>Please click the button below to finalize your session and export your data. Once the file downloads, you may safely close this browser window.</p>" +
+    "  <p>Your responses have been successfully recorded.</p>" +
+    "  <p>We greatly appreciate your time and participation in this research study.</p>" +
+    "  <p>Please click the button below and wait a few moments for it to securely save your data.</p>" +
     "</div>" +
-    '<div style="margin-top: 35px; text-align: center;">' +
-    '<button id="btn-finish-experiment" type="submit">Complete Study & Save Data</button>' +
+    "" +
+    '<div id="save-container" style="margin-top: 35px; text-align: center;">' +
+    '  <button id="btn-finish-experiment" type="submit" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">' +
+    "    Save Data & Finish" +
+    "  </button>" +
+    "  " +
+    '  <div id="loading-ui" style="display: none; flex-direction: column; align-items: center;">' +
+    '    <p style="margin-bottom: 10px; font-weight: bold; color: #d32f2f;">' +
+    "      Transmitting data, please do NOT close the window..." +
+    "    </p>" +
+    '    <div style="width: 100%; max-width: 400px; background-color: #e0e0e0; border-radius: 5px; overflow: hidden; height: 20px;">' +
+    '      <div id="progress-bar" style="width: 0%; height: 100%; background-color: #4CAF50; transition: width 0.8s ease;"></div>' +
+    "    </div>" +
+    "  </div>" +
+    "  " +
+    '  <div id="success-ui" style="display: none; margin-top: 20px;">' +
+    '    <h3 style="color: #4CAF50; margin-bottom: 10px;">Data Saved Successfully!</h3>' +
+    '    <p style="font-weight: bold;">You may safely close this browser tab.</p>' +
+    "  </div>" +
     "</div>" +
     "</div>",
   events: {
     "click button#btn-finish-experiment": function (event) {
       event.preventDefault();
-      this.end();
+
+      document.getElementById("btn-finish-experiment").style.display = "none";
+      document.getElementById("loading-ui").style.display = "flex";
+
+      const progressBar = document.getElementById("progress-bar");
+      setTimeout(() => {
+        progressBar.style.width = "40%";
+      }, 100);
+      setTimeout(() => {
+        progressBar.style.width = "75%";
+      }, 800);
+
+      const experimentData = this.options.datastore.exportJson();
+
+      fetch(GOOGLE_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: experimentData,
+      })
+        .then(() => {
+          progressBar.style.width = "100%";
+
+          setTimeout(() => {
+            document.getElementById("loading-ui").style.display = "none";
+            document.getElementById("success-ui").style.display = "block";
+          }, 900);
+        })
+        .catch((error) => {
+          console.error("Data transmission failed:", error);
+
+          document.getElementById("loading-ui").innerHTML =
+            '<p style="color:red; font-weight:bold;">Transmission failed. Downloading backup file...</p>';
+
+          this.options.datastore.download();
+        });
     },
   },
 });
@@ -1826,16 +1883,27 @@ const mili = d.getMilliseconds().toString();
 const datetime = hours + minutes + seconds + mili;
 
 // =========================================================================
-// STUDY EXECUTION & DATA TRANSMISSION (Google Sheets Backend)
+// STUDY EXECUTION & DATA TRANSMISSION
 // =========================================================================
-const GOOGLE_WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbyANppfcfti7ABQrIqtbXxNjP9AcQCsu80Jb1W3zI2ufGILyFhe3cr7lRKT2VXUhQS-/exec";
 
-study.on("end", function () {
-  study.options.datastore.transmit(GOOGLE_WEB_APP_URL, {
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-  });
-});
+//study.on("end", function () {
+//  const experimentData = study.options.datastore.exportJson();
+//
+//  fetch(GOOGLE_WEB_APP_URL, {
+//    method: "POST",
+//    mode: "no-cors",
+//    headers: {
+//      "Content-Type": "text/plain;charset=utf-8",
+//    },
+//    body: experimentData,
+//  })
+//    .then(() => {
+//      console.log("Data successfully sent to Google Sheets!");
+//    })
+//    .catch((error) => {
+//      console.error("Data transmission failed:", error);
+//    });
+//});
 
 //study.on("end", function () {
 //  study.options.datastore.download(
