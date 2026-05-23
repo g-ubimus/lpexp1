@@ -217,7 +217,7 @@ const csoundTask1_Eval = new lab.html.Form({
     '<div style="width: 100%; text-align: left; padding-bottom: 40px;">' +
     '<h3 style="text-align: center; margin-bottom: 30px;">Task #1: Reading Csound code</h3>' +
     '<div class="task-wrapper">' +
-    '<p>Now listen to the sound the code produces by clicking on "Run".</p>' +
+    '<p>Now listen to the sound the code produces by clicking on "Play".</p>' +
     '<textarea id="csound-execution-task1" readonly="readonly" class="textarea-code">' +
     "instr plucked\n" +
     "\tkFrequency = mtof(p4)\n" +
@@ -231,7 +231,7 @@ const csoundTask1_Eval = new lab.html.Form({
     'schedule("plucked", 2, 1, 67)\n' +
     "</textarea>\n" +
     '<div style="margin-top: 10px;">' +
-    '<button id="btn-csound-run-task1" class="button-run">▶ Run</button>\n' +
+    '<button id="btn-csound-run-task1" class="button-run">▶ Play</button>\n' +
     '<button id="btn-csound-stop-task1" class="button-stop">■ Stop</button>\n' +
     "</div>" +
     "</div>" +
@@ -317,7 +317,7 @@ const csoundTask2_Modify = new lab.html.Form({
     'schedule("generator", 0, 1)\n' +
     "</textarea>" +
     '<div style="margin-top: 10px;">' +
-    '<button id="btn-csound-run-preview2" class="button-run">▶ Run</button>\n' +
+    '<button id="btn-csound-run-preview2" class="button-run">▶ Play</button>\n' +
     '<button id="btn-csound-stop-preview2" class="button-stop">■ Stop</button>\n' +
     "</div>" +
     "</div>" +
@@ -351,7 +351,7 @@ const csoundTask2_Modify = new lab.html.Form({
     "</textarea>" +
     "</form>" +
     '<div style="margin-top: 10px;">' +
-    '<button id="btn-csound-run-task2" class="button-run">▶ Run</button>\n' +
+    '<button id="btn-csound-run-task2" class="button-run">▶ Play</button>\n' +
     '<button id="btn-csound-stop-task2" class="button-stop">■ Stop</button>\n' +
     "</div>" +
     '<div style="margin-top: 20px;">' +
@@ -448,7 +448,7 @@ const csoundTask3_Create = new lab.html.Form({
     "</textarea>" +
     "</form>" +
     '<div style="margin-top: 10px;">' +
-    '<button id="btn-csound-run-task3" class="button-run">▶ Run</button>\n' +
+    '<button id="btn-csound-run-task3" class="button-run">▶ Play</button>\n' +
     '<button id="btn-csound-stop-task3" class="button-stop">■ Stop</button>\n' +
     "</div>" +
     '<div style="margin-top: 20px;">' +
@@ -662,12 +662,12 @@ const lpTask1_Eval = new lab.html.Form({
     "<h3>Task #1: Reading litePlay code</h3>" +
     // Code area (Execution target)
     '<div class="task-wrapper">' +
-    '<p>Now listen to the sound the code produces by clicking on "Run".</p>' +
+    '<p>Now listen to the sound the code produces by clicking on "Play".</p>' +
     '<textarea id="liteplay-execution-task1" readonly="readonly" class="textarea-code">' +
     'arpeggio({howLoud: .5, howLong: 1, onSomething: steelAcousticGuitar}, [C4, E4, G4], 1, "forward").play()' +
     "</textarea>" +
     '<div style="text-align: center; margin-top: 10px;">' +
-    '<button id="btn-liteplay-run-task1" class="button-run">▶ Run</button>\n' +
+    '<button id="btn-liteplay-run-task1" class="button-run">▶ Play</button>\n' +
     '<button id="btn-liteplay-stop-task1" class="button-stop">■ Stop</button>\n' +
     "</div>" +
     "</div>" +
@@ -734,7 +734,7 @@ const lpTask2_Modify = new lab.html.Form({
     "ostinato({what: midPitch, howLoud: .5, howLong: .25, onSomething: steelAcousticGuitar}, 16).play()" +
     "</textarea>" +
     '<div style="text-align: center; margin-top: 10px;">' +
-    '<button id="btn-liteplay-run-preview2" class="button-run">▶ Run</button>\n' +
+    '<button id="btn-liteplay-run-preview2" class="button-run">▶ Play</button>\n' +
     '<button id="btn-liteplay-stop-preview2" class="button-stop">■ Stop</button>\n' +
     "</div>" +
     "</div>" +
@@ -751,7 +751,7 @@ const lpTask2_Modify = new lab.html.Form({
     "</textarea>" +
     "</form>" +
     '<div style="text-align: center; margin-top: 10px;">' +
-    '<button id="btn-liteplay-run-task2" class="button-run">▶ Run</button>\n' +
+    '<button id="btn-liteplay-run-task2" class="button-run">▶ Play</button>\n' +
     '<button id="btn-liteplay-stop-task2" class="button-stop">■ Stop</button>\n' +
     "</div>" +
     "</div>" +
@@ -824,7 +824,7 @@ const lpTask3_Create = new lab.html.Form({
     "</textarea>" +
     "</form>" +
     '<div style="text-align: center; margin-top: 10px;">' +
-    '<button id="btn-liteplay-run-task3" class="button-run">▶ Run</button>\n' +
+    '<button id="btn-liteplay-run-task3" class="button-run">▶ Play</button>\n' +
     '<button id="btn-liteplay-stop-task3" class="button-stop">■ Stop</button>\n' +
     "</div>" +
     "</div>" +
