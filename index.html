@@ -1,53 +1,52 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Experiment</title>
-  <!-- viewport setup -->
+  <meta charset="UTF-8">
+  <title>Readability in musical programming</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- lab.js and libraries -->
+  
   <script src="lib/lab.js" data-labjs-script="library"></script>
   <script src="lib/lab.fallback.js" data-labjs-script="fallback"></script>
-
-  <!-- Add Csound and litePlay.js-->
   <script  src="https://vlazzarini.github.io/litePlay.js/litePlay.constants.js"></script>
-
   <link rel="stylesheet" href="lib/lab.css">
-  <!-- actual experiment code -->
-  <script defer src="study.js"></script>
 </head>
 <body>
-  <!-- If you'd rather have a container with a fixed width
-       and variable height, try removing the fullscreen class below -->
-  <div class="container fullscreen">
     <header class="content-vertical-center content-horizontal-center">
       <div>
 	      <h1>Readability in musical programming</h1>
-        <!-- You could put a title here,
-             or remove the header element entirely -->
+	      <h2>Legibilidade em programação musical</h2>
       </div>
     </header>
-    <main
-      class="content-vertical-center content-horizontal-center"
-      data-labjs-section="main"
-    >
-      <!-- the nested div is helpful because the centering would
-           otherwise break the natural flow of content -->
-      <div>
-        <img src="lib/loading.svg" alt="loading icon" style="padding: 1rem"><br>
-        <p>
-          <strong>Preparing experiment</strong><br>
-          <span class="text-muted">please wait a moment</span>
-        </p>
-      </div>
+
+    <main class="content-vertical-center content-horizontal-center" data-labjs-section="main">
+  <div id="language-landing">
+	<h2>Please choose your language/Por favor, escolha seu idioma</h2>
+	<div style="display: flex; justify-content: center; align-items: center;">
+      	<button onclick="launchStudy('study.js', 'English')">English</button>
+      	<button onclick="launchStudy('study_pt.js', 'Portuguese')">Português</button>
+	</div>
+  </div>
+	    <main class="container" data-labjs-section="main" id="labjs-canvas" style="display: none;">
+	    </main>
+
+  <script src="lib/lab.js"></script>
+
+  <script>
+    function launchStudy(scriptName, selectedLanguage) {
+      window.chosenLanguage = selectedLanguage;
+      document.getElementById('language-landing').style.display = 'none';
+      document.getElementById('labjs-canvas').style.display = 'block';
+      const studyScript = document.createElement('script');
+      studyScript.src = scriptName;
+      studyScript.charset = "utf-8";
+      document.body.appendChild(studyScript);
+    }
+  </script>
     </main>
     <footer class="content-vertical-center content-horizontal-center">
       <div>
-        <!-- Again, please feel free to replace the footer content,
-             or to remove the footer if you don't need it -->
-	     <img src="https://www.maynoothuniversity.ie/sites/all/themes/nuim_themes/nuim/logo_old_2.png" width="50%" height="50%" alt="Maynooth University"> 
+       <img src="https://www.maynoothuniversity.ie/sites/all/themes/nuim_themes/nuim/logo_old_2.png" width="50%" height="50%" alt="Maynooth University"> 
       </div>
     </footer>
-  </div>
 </body>
 </html>
