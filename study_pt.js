@@ -1757,6 +1757,62 @@ const goldsmithTest = new lab.html.Form({
     "</div>",
 });
 
+const demographicsScreen = new lab.html.Form({
+  content: `
+    <div style="width: 100%; text-align: left; max-width: 600px; margin: 0 auto; padding: 20px; font-family: sans-serif;">
+      <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Demographic Information</h2>
+      
+      <p style="color: #666; margin-bottom: 25px; text-align: center;">
+        Por favor, preencha as informações a seguir antes de prosseguir. Todos os campos são obrigatórios.
+      </p>
+
+      <form id="demographics-form">
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Age:</label>
+          <input type="number" name="age" min="15" max="100" placeholder="ex: 25" required 
+                 style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Nationality / Country of Origin:</label>
+          <input type="text" name="nationality" placeholder="ex: Brasileiro, Português, Angolano..." required 
+                 style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Nível de experiência com programação de computadores:</label>
+          <select name="experience_programming" required 
+                  style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: white; box-sizing: border-box;">
+            <option value="" disabled selected>Selecione uma opção...</option>
+            <option value="none">Nenhuma experiência</option>
+            <option value="beginner">Iniciante (sei um mínimo de sintaxe, escrevi pequenos scripts)</option>
+            <option value="intermediate">Intermediário (consigo programar pequenos programas/apps de estudante)</option>
+            <option value="advanced">Avançado (fluente em váriasas linguagens, arquiteturas complexas)</option>
+            <option value="professional">Engenheiro de Software Profissional</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 35px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Nível de experiência com música:</label>
+          <select name="experience_music" required 
+                  style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: white; box-sizing: border-box;">
+            <option value="" disabled selected>Selecione uma opção...</option>
+            <option value="none">Nenhum aprendizado formal ou informal (apenas ouvinte casual)</option>
+            <option value="amateur">Amador (autodidata, toco ou componho ocasionalmente)</option>
+            <option value="intermediate">Intermediário (algumas aulas regulares ou prática regular de instrumento/composição)</option>
+            <option value="advanced">Avançado (muitos anos de treinamento formal, graduação em música, ou apresento com muita frequência)</option>
+            <option value="professional">Musicista/produtor profissional</option>
+          </select>
+        </div>
+
+        <div style="text-align: center;">
+    	<button id="submit-demo" type="submit" form="demographics-form">Continuar &rarr;</button>
+        </div>
+      </form>
+    </div>
+  `,
+});
+
 const GOOGLE_WEB_APP_URL =
   "https://script.google.com/macros/s/AKfycbz-jPN1E6eOD5IP3EwBZScmBmhH4UUAD7Mm2tVUbBbZGLsNB476jVwXm_7wn0dk2wix/exec";
 
@@ -1872,7 +1928,12 @@ const liteplayBlock = new lab.flow.Sequence({
 const experimentalCondition = Math.random() < 0.5 ? csoundBlock : liteplayBlock;
 
 const study = new lab.flow.Sequence({
-  content: [introScreen, experimentalCondition, goldsmithTest, thankYouScreen],
+  content: [
+    introScreen,
+    demographicsScreen,
+    experimentalCondition,
+    thankYouScreen,
+  ],
 });
 
 const d = new Date();

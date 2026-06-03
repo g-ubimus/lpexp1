@@ -1768,7 +1768,7 @@ const demographicsScreen = new lab.html.Form({
       <form id="demographics-form">
         <div style="margin-bottom: 20px;">
           <label style="display: block; font-weight: bold; margin-bottom: 8px;">Age:</label>
-          <input type="number" name="age" min="18" max="100" placeholder="e.g., 25" required 
+          <input type="number" name="age" min="15" max="100" placeholder="e.g., 25" required 
                  style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
         </div>
 
@@ -1792,7 +1792,7 @@ const demographicsScreen = new lab.html.Form({
         </div>
 
         <div style="margin-bottom: 35px;">
-          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Level of experience with music / music training:</label>
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Level of experience with music:</label>
           <select name="experience_music" required 
                   style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: white; box-sizing: border-box;">
             <option value="" disabled selected>Select an option...</option>
