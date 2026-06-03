@@ -1756,6 +1756,62 @@ const goldsmithTest = new lab.html.Form({
     "</div>",
 });
 
+const demographicsScreen = new lab.html.Form({
+  content: `
+    <div style="width: 100%; text-align: left; max-width: 600px; margin: 0 auto; padding: 20px; font-family: sans-serif;">
+      <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Demographic Information</h2>
+      
+      <p style="color: #666; margin-bottom: 25px; text-align: center;">
+        Please fill out the following information before proceeding. All fields are required.
+      </p>
+
+      <form id="demographics-form">
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Age:</label>
+          <input type="number" name="age" min="18" max="100" placeholder="e.g., 25" required 
+                 style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Nationality / Country of Origin:</label>
+          <input type="text" name="nationality" placeholder="e.g., Portuguese, Irish, Brazilian" required 
+                 style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Level of experience with computer programming:</label>
+          <select name="experience_programming" required 
+                  style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: white; box-sizing: border-box;">
+            <option value="" disabled selected>Select an option...</option>
+            <option value="none">No experience at all</option>
+            <option value="beginner">Beginner (know basic syntax, wrote small scripts)</option>
+            <option value="intermediate">Intermediate (can build small projects / study apps)</option>
+            <option value="advanced">Advanced (fluent in multiple languages, complex architectures)</option>
+            <option value="professional">Professional Software Engineer</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 35px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Level of experience with music / music training:</label>
+          <select name="experience_music" required 
+                  style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: white; box-sizing: border-box;">
+            <option value="" disabled selected>Select an option...</option>
+            <option value="none">No formal or informal training (casual listener only)</option>
+            <option value="amateur">Amateur / Hobbyist (self-taught, play or compose occasionally)</option>
+            <option value="intermediate">Intermediate (some formal lessons or regular practice/composition)</option>
+            <option value="advanced">Advanced (several years of formal training, university music, or highly active performing)</option>
+            <option value="professional">Professional Musician / Music Producer</option>
+          </select>
+        </div>
+
+        <div style="text-align: center;">
+    	<button id="submit-demo" type="submit" form="demographics-form">Continue &rarr;</button>
+        </div>
+      </form>
+    </div>
+  `,
+});
+
 const GOOGLE_WEB_APP_URL =
   "https://script.google.com/macros/s/AKfycbz-jPN1E6eOD5IP3EwBZScmBmhH4UUAD7Mm2tVUbBbZGLsNB476jVwXm_7wn0dk2wix/exec";
 
@@ -1835,11 +1891,9 @@ const thankYouScreen = new lab.html.Form({
 
 // =========================================================================
 // Study logic:
-// Begin screen
-// Define csound block
-// Define litePlay block
-// Randomize between the two
-// Goldsmith test in the beggining
+// Consent
+// Demographics
+// Randomize between csound and lp
 // Than you screen
 // =========================================================================
 const csoundBlock = new lab.flow.Sequence({
@@ -1871,7 +1925,12 @@ const liteplayBlock = new lab.flow.Sequence({
 const experimentalCondition = Math.random() < 0.5 ? csoundBlock : liteplayBlock;
 
 const study = new lab.flow.Sequence({
-  content: [introScreen, experimentalCondition, goldsmithTest, thankYouScreen],
+  content: [
+    introScreen,
+    demographicsScreen,
+    experimentalCondition,
+    thankYouScreen,
+  ],
 });
 
 const d = new Date();
