@@ -1773,8 +1773,8 @@ const demographicsScreen = new lab.html.Form({
         </div>
 
         <div style="margin-bottom: 20px;">
-          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Nationality / Country of Origin:</label>
-          <input type="text" name="nationality" placeholder="e.g., Portuguese, Irish, Brazilian" required 
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Country of origin:</label>
+          <input type="text" name="nationality" placeholder="e.g., Ireland, England, China, USA..." required 
                  style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
         </div>
 

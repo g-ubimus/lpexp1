@@ -1768,14 +1768,14 @@ const demographicsScreen = new lab.html.Form({
 
       <form id="demographics-form">
         <div style="margin-bottom: 20px;">
-          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Age:</label>
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Idade:</label>
           <input type="number" name="age" min="15" max="100" placeholder="ex: 25" required 
                  style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
         </div>
 
         <div style="margin-bottom: 20px;">
-          <label style="display: block; font-weight: bold; margin-bottom: 8px;">Nationality / Country of Origin:</label>
-          <input type="text" name="nationality" placeholder="ex: Brasileiro, Português, Angolano..." required 
+          <label style="display: block; font-weight: bold; margin-bottom: 8px;">País de origem:</label>
+          <input type="text" name="nationality" placeholder="ex: Brasil, Portugal, Angola..." required 
                  style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
         </div>
 
