@@ -4,14 +4,14 @@ const startLP = async (event, editorId) => {
   if (event) event.preventDefault();
   if (!liteplayEngine) {
     try {
-      console.log("Loading liteTocar engine...");
-      const { liteTocar } =
-        await import("https://g-ubimus.github.io/liteTocar.js/src/core/liteTocar.constants.js");
+      console.log("Loading litePlay engine...");
+      const { litePlay } =
+        await import("https://g-ubimus.github.io/litePlay.js/src/core/litePlay.constants.js");
       liteplayEngine = await lpLoad();
       Object.assign(window, liteplayEngine);
-      console.log("liteTocar is ready!");
+      console.log("litePlay is ready!");
     } catch (error) {
-      console.error("Failed to load liteTocar:", error);
+      console.error("Failed to load litePlay:", error);
       return;
     }
   }
@@ -20,7 +20,7 @@ const startLP = async (event, editorId) => {
     const userLP = codeEditorLP.value;
     eval(userLP);
   } catch (error) {
-    console.error("Failed to execute liteTocar code:", error);
+    console.error("Failed to execute litePlay code:", error);
   }
 };
 
@@ -32,7 +32,7 @@ const stopLP = async (event) => {
       await reset();
       console.log("Audio stopped.");
     } catch (error) {
-      console.log("Failed to stop liteTocar:", error);
+      console.log("Failed to stop litePlay:", error);
       return;
     }
   }
@@ -217,7 +217,7 @@ const csoundTask1_Eval = new lab.html.Form({
     '<div style="width: 100%; text-align: left; padding-bottom: 40px;">' +
     '<h3 style="text-align: center; margin-bottom: 30px;">Tarefa #1: Lendo código em Csound</h3>' +
     '<div class="task-wrapper">' +
-    '<p>Now listen to the sound the code produces by clicking on "Tocar".</p>' +
+    '<p>Agora escute o som produzido clicando em "Tocar".</p>' +
     '<textarea id="csound-execution-task1" readonly="readonly" class="textarea-code">' +
     "instr plucked\n" +
     "\tkFrequency = mtof(p4)\n" +
@@ -626,7 +626,7 @@ const csoundSUS = new lab.html.Form({
 });
 
 // =========================================================================
-// Task 1: Read liteTocar code and describe it
+// Task 1: Read litePlay code and describe it
 // =========================================================================
 const lpTask1_Desc = new lab.html.Form({
   content:
@@ -654,7 +654,7 @@ const lpTask1_Desc = new lab.html.Form({
 });
 
 // =========================================================================
-// Task 1: Self-evaluation of liteTocar code description correctness
+// Task 1: Self-evaluation of litePlay code description correctness
 // =========================================================================
 const lpTask1_Eval = new lab.html.Form({
   content:
@@ -715,7 +715,7 @@ const lpTask1_Eval = new lab.html.Form({
 });
 
 // =========================================================================
-// Task 2: Modify liteTocar code
+// Task 2: Modify litePlay code
 // =========================================================================
 const lpTask2_Modify = new lab.html.Form({
   content:
@@ -775,7 +775,7 @@ const lpTask2_Modify = new lab.html.Form({
 });
 
 // =========================================================================
-// Task 2: Self-evaluation of liteTocar modification correctness
+// Task 2: Self-evaluation of litePlay modification correctness
 // =========================================================================
 const lpTask2_Eval = new lab.html.Form({
   content:
@@ -810,7 +810,7 @@ const lpTask2_Eval = new lab.html.Form({
 });
 
 // =========================================================================
-// Task 3: Creating with liteTocar
+// Task 3: Creating with litePlay
 // =========================================================================
 const lpTask3_Create = new lab.html.Form({
   content:
@@ -842,7 +842,7 @@ const lpTask3_Create = new lab.html.Form({
 });
 
 // =========================================================================
-// Task 3: Self-evaluation of liteTocar creativity
+// Task 3: Self-evaluation of litePlay creativity
 // =========================================================================
 const lpTask3_Eval = new lab.html.Form({
   content:
@@ -877,12 +877,12 @@ const lpTask3_Eval = new lab.html.Form({
 });
 
 // =========================================================================
-// liteTocar.js SUS
+// litePlay.js SUS
 // =========================================================================
 const lpSUS = new lab.html.Form({
   content:
     '<div style="width: 100%; text-align: center;">' +
-    "<h3>liteTocar.js System Evaluation</h3>" +
+    "<h3>Avaliação do sistema litePlay.js</h3>" +
     '<div style="width: 80%; max-width: 900px; margin: 0 auto; text-align: left;">' +
     "<p>Por favor, indique o quanto você concorda ou discorda com as seguintes declarações sobre o sistema que acabou de usar.</p>" +
     '<form id="sus-lp">' +
@@ -1760,7 +1760,7 @@ const goldsmithTest = new lab.html.Form({
 const demographicsScreen = new lab.html.Form({
   content: `
     <div style="width: 100%; text-align: left; max-width: 600px; margin: 0 auto; padding: 20px; font-family: sans-serif;">
-      <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Demographic Information</h2>
+      <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Informação demográfica</h2>
       
       <p style="color: #666; margin-bottom: 25px; text-align: center;">
         Por favor, preencha as informações a seguir antes de prosseguir. Todos os campos são obrigatórios.
@@ -1894,7 +1894,7 @@ const thankYouScreen = new lab.html.Form({
 // Study logic:
 // Begin screen
 // Define csound block
-// Define liteTocar block
+// Define block
 // Randomize between the two
 // Goldsmith test in the beggining
 // Than you screen
