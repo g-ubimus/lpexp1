@@ -325,7 +325,7 @@ const csoundTask2_Modify = new lab.html.Form({
     "<p>Agora, modifique o código de forma que:<br>" +
     "<b>1.</b> As notas são reproduzidas no registro agudo.<br>" +
     "<b>2.</b> Apenas 8 notas são tocadas.<br>" +
-    "<b>3.</b> A duração de cada nota é duplicada.<br><br>" +
+    "<b>3.</b> A duração de cada nota será o dobro da atual.<br><br>" +
     "Quando terminar, clique para continuar.</p>" +
     '<form id="form-csound-task2-modify">' +
     '<textarea name="csound_data_task2_modification" id="csound-editor-task2" class="textarea-code" required>' +
